@@ -20,7 +20,7 @@ export default function TaskForm(props: ITaskForm) {
 
     const payload: ITaskItem = props.isEditing
       ? { ...form }
-      : { ...form, id: generateId() };
+      : { ...form, id: generateId(), dateCreated: new Date() };
 
     props.submit(payload);
     // setForm(props.task);

@@ -11,12 +11,13 @@ export const initialEditingTask: ITaskItem = {
   title: "",
   text: "",
   id: "",
+  dateCreated: new Date(),
 };
 
 const initialState: ITaskState = {
   tasks: [
-    { title: "1", text: "111111111", id: "afghjsn" },
-    { title: "2", text: "222222222", id: "ghdjsn" },
+    { title: "1", text: "111111111", id: "afghjsn", dateCreated: new Date() },
+    { title: "2", text: "222222222", id: "ghdjsn", dateCreated: new Date() },
   ],
   isEditingTask: false,
   editingTask: initialEditingTask,

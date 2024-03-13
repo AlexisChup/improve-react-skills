@@ -8,6 +8,7 @@ export interface ITaskItem {
   text: string;
   id: string;
   remove?: (id: string) => void;
+  dateCreated: Date;
 }
 
 export default function TaskItem(props: ITaskItem) {
@@ -16,6 +17,9 @@ export default function TaskItem(props: ITaskItem) {
   return (
     <Card className="my-1">
       <Card.Title className="mt-2">{props.title}</Card.Title>
+      <Card.Subtitle className="mb-2 text-muted">
+        {`Created the ${props.dateCreated.getUTCDay()}-${props.dateCreated.getUTCMonth()}-${props.dateCreated.getUTCFullYear()}`}
+      </Card.Subtitle>
       <Card.Body>{props.text}</Card.Body>
       <Card.Footer>
         <Button
