@@ -3,24 +3,27 @@ import { Form, Button } from "react-bootstrap";
 
 import { ITaskItem } from "./TaskItem";
 
-const initialTaskForm: ITaskItem = {
-  title: "",
-  text: "",
-};
+const generateId = (): string => Math.random().toString(36).substring(2, 10);
 
 export interface ITaskForm {
   submit: (task: ITaskItem) => void;
+  task: ITaskItem;
+  isEditing: boolean;
 }
 
 export default function TaskForm(props: ITaskForm) {
-  const [form, setForm] = useState(initialTaskForm);
+  const [form, setForm] = useState(props.task);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     event.stopPropagation();
 
-    props.submit(form);
-    // setForm(initialTaskForm);
+    const payload: ITaskItem = props.isEditing
+      ? { ...form }
+      : { ...form, id: generateId() };
+
+    props.submit(payload);
+    // setForm(props.task);
   };
 
   return (
@@ -46,7 +49,7 @@ export default function TaskForm(props: ITaskForm) {
           />
         </Form.Group>
         <Button className="mt-2" type="submit">
-          Create Task
+          {props.isEditing ? `Edit` : `Create Task`}
         </Button>
       </Form>
     </div>

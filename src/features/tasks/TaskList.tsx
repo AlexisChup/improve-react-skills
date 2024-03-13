@@ -12,10 +12,10 @@ export default function TaskList(props: ITaskList) {
       {props.tasks.length ? (
         props.tasks.map((task, index) => (
           <TaskItem
-            index={index}
             title={task.title}
             text={task.text}
             key={index}
+            id={task.id}
           />
         ))
       ) : (
