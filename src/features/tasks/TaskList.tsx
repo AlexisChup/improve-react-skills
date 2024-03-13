@@ -10,7 +10,7 @@ export default function TaskList(props: ITaskList) {
   return (
     <div className="row">
       {props.tasks.length ? (
-        props.tasks.map((task, index) => <TaskItem {...task} />)
+        props.tasks.map((task, index) => <TaskItem {...task} key={index} />)
       ) : (
         <div>No task for now on.</div>
       )}

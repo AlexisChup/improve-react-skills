@@ -2,23 +2,28 @@ import React from "react";
 import { Button } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 import { useAppDispatch } from "../../app/hooks";
-import { removeById, prepareEditById } from "./tasksSlice";
+import { removeById, prepareEditById, toggleCompletion } from "./tasksSlice";
 export interface ITaskItem {
   title: string;
   text: string;
   id: string;
-  remove?: (id: string) => void;
-  dateCreated: Date;
+  dateCreated: number;
+  isCompleted: boolean;
 }
 
 export default function TaskItem(props: ITaskItem) {
   const dispatch = useAppDispatch();
 
   return (
-    <Card className="my-1">
+    <Card
+      className="my-1"
+      style={{ backgroundColor: props.isCompleted ? "#DDD" : "#FFF" }}
+    >
       <Card.Title className="mt-2">{props.title}</Card.Title>
       <Card.Subtitle className="mb-2 text-muted">
-        {`Created the ${props.dateCreated.getUTCDay()}-${props.dateCreated.getUTCMonth()}-${props.dateCreated.getUTCFullYear()}`}
+        {`Created the ${new Date(props.dateCreated).getUTCDay()}-${new Date(
+          props.dateCreated
+        ).getUTCMonth()}-${new Date(props.dateCreated).getUTCFullYear()}`}
       </Card.Subtitle>
       <Card.Body>{props.text}</Card.Body>
       <Card.Footer>
@@ -36,6 +41,15 @@ export default function TaskItem(props: ITaskItem) {
           onClick={(e) => dispatch(prepareEditById(props))}
         >
           Edit
+        </Button>
+        <Button
+          variant={props.isCompleted ? "warning" : "success"}
+          size="sm"
+          className=""
+          onClick={(e) => dispatch(toggleCompletion(props.id))}
+          // checked={}
+        >
+          {props.isCompleted ? "Incomplete" : "Complete"}
         </Button>
       </Card.Footer>
     </Card>

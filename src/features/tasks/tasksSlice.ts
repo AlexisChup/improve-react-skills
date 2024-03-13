@@ -11,13 +11,26 @@ export const initialEditingTask: ITaskItem = {
   title: "",
   text: "",
   id: "",
-  dateCreated: new Date(),
+  dateCreated: new Date().getTime(),
+  isCompleted: false,
 };
 
 const initialState: ITaskState = {
   tasks: [
-    { title: "1", text: "111111111", id: "afghjsn", dateCreated: new Date() },
-    { title: "2", text: "222222222", id: "ghdjsn", dateCreated: new Date() },
+    {
+      title: "1",
+      text: "111111111",
+      id: "afghjsn",
+      dateCreated: new Date().getTime(),
+      isCompleted: false,
+    },
+    {
+      title: "2",
+      text: "222222222",
+      id: "ghdjsn",
+      dateCreated: new Date().getTime(),
+      isCompleted: false,
+    },
   ],
   isEditingTask: false,
   editingTask: initialEditingTask,
@@ -58,10 +71,31 @@ export const tasksSlice = createSlice({
         editingTask: initialEditingTask,
       };
     },
+    toggleCompletion: (state, action: PayloadAction<string>) => {
+      return {
+        ...state,
+        tasks: state.tasks.map((task) => {
+          if (task.id === action.payload) {
+            return {
+              ...task,
+              isCompleted: !task.isCompleted,
+            };
+          }
+
+          return task;
+        }),
+      };
+    },
   },
 });
 
-export const { addTask, reset, removeById, prepareEditById, editById } =
-  tasksSlice.actions;
+export const {
+  addTask,
+  reset,
+  removeById,
+  prepareEditById,
+  editById,
+  toggleCompletion,
+} = tasksSlice.actions;
 
 export default tasksSlice.reducer;

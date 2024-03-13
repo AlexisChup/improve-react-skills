@@ -20,7 +20,7 @@ export default function TaskForm(props: ITaskForm) {
 
     const payload: ITaskItem = props.isEditing
       ? { ...form }
-      : { ...form, id: generateId(), dateCreated: new Date() };
+      : { ...form, id: generateId(), dateCreated: new Date().getTime() };
 
     props.submit(payload);
     // setForm(props.task);
@@ -48,7 +48,7 @@ export default function TaskForm(props: ITaskForm) {
             onChange={(e) => setForm({ ...form, text: e.target.value })}
           />
         </Form.Group>
-        <Button className="mt-2" type="submit">
+        <Button className="mt-2" type="submit" size="sm">
           {props.isEditing ? `Edit` : `Create Task`}
         </Button>
       </Form>

@@ -21,20 +21,38 @@ export default function TaskManager() {
   };
 
   return (
-    <div className="container">
-      <div className="row">
-        <div className="col-2 d-flex justify-content-center">
-          <div>
-            <Button onClick={(e) => dispatch(reset())}>Reset</Button>
+    <div className="container my-3">
+      <div className="row px-2 py-2 bg-light rounded border border-primary">
+        <div className="col">
+          <div className="row">
+            <h2>Create task</h2>
+          </div>
+          <div className="row">
+            <TaskForm
+              submit={addNewTask}
+              task={initialEditingTask}
+              isEditing={false}
+            />
           </div>
         </div>
         <div className="col">
-          <TaskForm
-            submit={addNewTask}
-            task={initialEditingTask}
-            isEditing={false}
-          />
+          <div className="row">
+            <h2>Actions</h2>
+          </div>
+          <div className="row">
+            <div>
+              <Button
+                size="sm"
+                variant="danger"
+                onClick={(e) => dispatch(reset())}
+              >
+                Reset
+              </Button>
+            </div>
+          </div>
         </div>
+      </div>
+      <div className="row mt-3">
         <div className="col">
           <TaskList tasks={tasks} />
         </div>
