@@ -16,16 +16,18 @@ export default function TaskItem(props: ITaskItem) {
 
   return (
     <Card
-      className="my-1"
+      className="my-1 px-0"
       style={{ backgroundColor: props.isCompleted ? "#DDD" : "#FFF" }}
     >
-      <Card.Title className="mt-2">{props.title}</Card.Title>
-      <Card.Subtitle className="mb-2 text-muted">
-        {`Created the ${new Date(props.dateCreated).getUTCDay()}-${new Date(
-          props.dateCreated
-        ).getUTCMonth()}-${new Date(props.dateCreated).getUTCFullYear()}`}
-      </Card.Subtitle>
-      <Card.Body>{props.text}</Card.Body>
+      <div className="px-3">
+        <Card.Title className="mt-2">{props.title}</Card.Title>
+        <Card.Subtitle className="mb-2 text-muted">
+          {`Created the ${new Date(props.dateCreated).getUTCDay()}-${new Date(
+            props.dateCreated
+          ).getUTCMonth()}-${new Date(props.dateCreated).getUTCFullYear()}`}
+        </Card.Subtitle>
+        <Card.Body>{props.text}</Card.Body>
+      </div>
       <Card.Footer>
         <Button
           variant="danger"
@@ -47,7 +49,6 @@ export default function TaskItem(props: ITaskItem) {
           size="sm"
           className=""
           onClick={(e) => dispatch(toggleCompletion(props.id))}
-          // checked={}
         >
           {props.isCompleted ? "Incomplete" : "Complete"}
         </Button>

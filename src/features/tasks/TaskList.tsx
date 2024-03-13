@@ -8,7 +8,7 @@ export interface ITaskList {
 
 export default function TaskList(props: ITaskList) {
   return (
-    <div className="row">
+    <div className="row px-0">
       {props.tasks.length ? (
         props.tasks.map((task, index) => <TaskItem {...task} key={index} />)
       ) : (
