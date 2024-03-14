@@ -1,11 +1,11 @@
 import React from "react";
 import "./App.css";
-import TaskManager from "./features/tasks/TaskManager";
+import IndexRoutes from "./routes/IndexRoutes";
 
 function App() {
   return (
     <div>
-      <TaskManager />
+      <IndexRoutes />
     </div>
   );
 }
